@@ -2,6 +2,6 @@
 
 You can use the [bakoriharsh@gmail.com](bakoriharsh@gmail.com) to contact me. 
 
-
+<a href="#">
 ![HarshBakori's GitHub stats](https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true)
-
+</a>
