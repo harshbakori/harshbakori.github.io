@@ -6,7 +6,4 @@ You can use the [bakoriharsh@gmail.com](bakoriharsh@gmail.com) to contact me.
   <img align="center" src="https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true" />
 <!-- ![HarshBakori's GitHub stats](https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true) -->
 </a>
-<a href="#">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true" />
-<!-- ![HarshBakori's GitHub stats](https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true) -->
-</a>
+
