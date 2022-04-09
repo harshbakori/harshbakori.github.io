@@ -24,9 +24,7 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
           <span class="cyan">:</span> <span class="green">'Harsh Bakori'</span>,
           <br/>
           <span class="space red">email</span>
-          <span class="cyan">:</span> <span class="green">'bakoriharsh@gmail.com</span>',
-          <br/>
-          
+          <span class="cyan">:</span> <span class="green">'bakoriharsh@gmail.com</span>'
           };
         </p>
       </div>
