@@ -5,7 +5,7 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 <a href="#">
   <img align="center" src="https://github-readme-stats.vercel.app/api?username=harshbakori&theme=dark&show_icons=true" />
 </a>
-
+<link rel="stylesheet" href="card.css">
 <div class="content">
   <div class="card">
     <div class="card__side card__side--front">
