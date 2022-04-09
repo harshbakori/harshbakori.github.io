@@ -8,17 +8,17 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 
 <link rel="stylesheet" href="https://github.com/harshbakori/harshbakori.github.io/edit/main/card.css">
 
-<div class="content1">
-  <div class="card1">
-    <div class="card__side1 card__side--front">
+<div class="content">
+  <div class="card">
+    <div class="card__side card__side--front">
       <!-- Front Content -->
-      <div class="card__cont1">
+      <div class="card__cont">
         <span class="blue">Harsh Bakori</span>
       </div>
     </div>
-    <div class="card__side1 card__side--back">
+    <div class="card__side card__side--back">
       <!-- Back Content -->
-      <div class="card__cta1">
+      <div class="card__cta">
         <p> aboutMe <span class="cyan">=</span> {
           <br />
           <span class="space red">name</span>
