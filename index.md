@@ -18,7 +18,7 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
     <div class="card__side card__side--back">
       <!-- Back Content -->
       <div class="card__cta">
-        <p><span class="purple">const</span> aboutMe <span class="cyan">=</span> {
+        <p> aboutMe <span class="cyan">=</span> {
           <br />
           <span class="space red">name</span>
           <span class="cyan">:</span> <span class="green">'Harsh Bakori'</span>,
