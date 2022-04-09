@@ -12,7 +12,7 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
     <div class="card__side card__side--front">
       <!-- Front Content -->
       <div class="card__cont">
-        <span>Harsh Bakori</span>
+        <span >Harsh Bakori</span>
       </div>
     </div>
     <div class="card__side card__side--back">
