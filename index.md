@@ -8,26 +8,16 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 
 <link rel="stylesheet" href="https://github.com/harshbakori/harshbakori.github.io/edit/main/card.css">
 
-<div class="content">
-  <div class="card">
-    <div class="card__side card__side--front">
-      <!-- Front Content -->
-      <div class="card__cont">
-        <span class="blue">Harsh Bakori</span>
-      </div>
+
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="img_avatar.png" alt="Harsh Bakori" style="width:300px;height:300px;">
     </div>
-    <div class="card__side card__side--back">
-      <!-- Back Content -->
-      <div class="card__cta">
-        <p> aboutMe <span class="cyan">=</span> {
-          <br />
-          <span class="space red">name</span>
-          <span class="cyan">:</span> <span class="green">'Harsh Bakori'</span>,
-          <br/>
-          <span class="space red">email</span>
-          <span class="cyan">:</span> <span class="green">'bakoriharsh@gmail.com</span>'
-          };
-        </p>
-      </div>
+    <div class="flip-card-back">
+      <h1>Harsh Bakori</h1>
+      <p>Engineer</p>
+      <p>-----</p>
     </div>
   </div>
+</div>
