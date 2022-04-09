@@ -9,16 +9,8 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 <link rel="stylesheet" href="https://github.com/harshbakori/harshbakori.github.io/edit/main/card.css">
 
 
-<div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-<!--       <img src="img_avatar.png" alt="Harsh Bakori" style="width:300px;height:300px;"> -->
+<div class="card">
+  
       Harsh Bakori
-    </div>
-    <div class="flip-card-back">
-      <h1>Harsh Bakori</h1>
-      <p>Engineer</p>
-      <p>-----</p>
-    </div>
-  </div>
+  
 </div>
