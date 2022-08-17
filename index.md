@@ -7,3 +7,6 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 </a>
 
 <link rel="stylesheet" href="https://github.com/harshbakori/harshbakori.github.io/edit/main/card.css">
+
+<embed src="https://github.com/harshbakori/harshbakori.github.io/blob/main/Harsh's Resume.pdf" width="500" height="375" 
+ type="application/pdf">
