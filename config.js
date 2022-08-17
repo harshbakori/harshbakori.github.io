@@ -1,0 +1,1 @@
+IDRViewer.config = {"pagecount":1,"title":"","author":"","subject":"","keywords":"","creator":"wkhtmltopdf 0.12.4","producer":"Qt 4.8.7","creationdate":"D:20220817075227+02'00'","moddate":"","trapped":"","fileName":"Harsh's_Resume.pdf","bounds":[[935,1210]],"bookmarks":[],"thumbnailType":"jpg","pageType":"html","pageLabels":[]};
