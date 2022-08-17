@@ -8,5 +8,5 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 
 <link rel="stylesheet" href="https://github.com/harshbakori/harshbakori.github.io/edit/main/card.css">
 
-<embed src="Harsh's Resume.pdf"  width="100%" hight="100%" type="application/pdf">
+<embed src="Harsh's Resume.pdf"  width="100%" hight="574" type="application/pdf">
 <!-- -------------------------------------------------- html template of resum----------------------------------------------------------------------------------------- -->
