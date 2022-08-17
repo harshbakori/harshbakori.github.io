@@ -10,7 +10,7 @@ You can use the [bakoriharsh@gmail.com](https://mail.google.com/mail/?view=cm&fs
 
 <!-- <embed src="Harsh's Resume.pdf"  width="100%" hight="574px" type="application/pdf"> -->
 <!-- -------------------------------------------------- html template of resum----------------------------------------------------------------------------------------- -->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
