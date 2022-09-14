@@ -145,7 +145,7 @@
 <div class="text-container"><span id="t1_1" class="t s1">Harsh Bakori </span>
 <span id="t2_1" class="t s2">Project Manager </span>
 <span id="t3_1" class="t s3">Eager to learn new skills with passion and discipline. </span>
-<span id="t4_1" class="t s3"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bakoriharsh@gmail.com.com&su=Contacted using Github linck&body=Dear Mr.Harsh, " style="color:'#fff';">bakoriharsh@gmail.com</a> </span><span id="t5_1" class="t s3">9427123617 </span><span id="t6_1" class="t s3"><a href="github.com/harshbakori" style="color:'#fff';">github.com/harshbakori</a> </span>
+<span id="t4_1" class="t s3"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bakoriharsh@gmail.com.com&su=Contacted using Github linck&body=Dear Mr.Harsh, " style="color:'#fff' !important;">bakoriharsh@gmail.com</a> </span><span id="t5_1" class="t s3">9427123617 </span><span id="t6_1" class="t s3"><a href="github.com/harshbakori" style="color:'#fff' !important;">github.com/harshbakori</a> </span>
 <span id="t7_1" class="t s4">WORK EXPERINCE </span>
 <span id="t8_1" class="t s5">Assistant Systems Engineer </span>
 <span id="t9_1" class="t s6">Tata Consultancy Service </span>
