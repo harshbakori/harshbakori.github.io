@@ -69,6 +69,7 @@
             if (eci.position) {
               const gdPos = satellite.eciToGeodetic(eci.position, gmst);
               d.lat = satellite.radiansToDegrees(gdPos.latitude);
+                console.log("gdPos.latitude",gdPos.latitude);
               d.lng = satellite.radiansToDegrees(gdPos.longitude);
               d.alt = gdPos.height / EARTH_RADIUS_KM
             }
