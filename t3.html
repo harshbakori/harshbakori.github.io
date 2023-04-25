@@ -1,117 +1,232 @@
 <head>
-    <style>
-      body { margin: 0; }
-  
-      #time-log {
-        position: absolute;
-        font-size: 12px;
-        font-family: sans-serif;
-        padding: 5px;
-        border-radius: 3px;
-        background-color: rgba(200, 200, 200, 0.1);
-        color: lavender;
-        bottom: 10px;
-        right: 10px;
-      }
-    </style>
-  
-    <script src="//unpkg.com/satellite.js/dist/satellite.min.js"></script>
-  
-    <script src="//unpkg.com/three"></script>
-    <script src="//unpkg.com/three-globe"></script>
-  <!--  <script src="../../dist/three-globe.js"></script>-->
-  </head>
-  
-  <body>
-    <div id="globeViz"></div>
-    <div id="time-log"></div>
-  
-    <script type="importmap">{ "imports": { "three": "https://unpkg.com/three/build/three.module.js" }}</script>
-    <script type="module">
-      import { TrackballControls } from '//unpkg.com/three/examples/jsm/controls/TrackballControls.js';
-      Object.assign(THREE , { TrackballControls });
-  
-      const EARTH_RADIUS_KM = 6371; // km
-      const SAT_SIZE = 500; // km
-      const TIME_STEP = 1 * 16.667; // per frame
-  
-      const timeLogger = document.getElementById('time-log');
-  
-      const Globe = new ThreeGlobe()
-        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-        .objectLat('lat')
-        .objectLng('lng')
-        .objectAltitude('alt');
-  
-      const satGeometry = new THREE.OctahedronGeometry(SAT_SIZE * Globe.getGlobeRadius() / EARTH_RADIUS_KM / 2, 0);
-      const satMaterial = new THREE.MeshLambertMaterial({ color: 'palegreen', transparent: true, opacity: 0.7 });
-      Globe.objectThreeObject(() => new THREE.Mesh(satGeometry, satMaterial));
-  
-      fetch('./space-track-leo.txt').then(r => r.text()).then(rawData => {
-        const tleData = rawData.replace(/\r/g, '').split(/\n(?=[^12])/).map(tle => tle.split('\n'));
-        const satData = tleData.map(([name, ...tle]) => ({
-          satrec: satellite.twoline2satrec(...tle),
-          name: name.trim().replace(/^0 /, '')
-        }));
-  
-        // time ticker
-        let time = new Date();
-        (function frameTicker() {
-          requestAnimationFrame(frameTicker);
-  
-          time = new Date(+time + TIME_STEP);
-          timeLogger.innerText = time.toString();
-  
-          // Update satellite positions
-          const gmst = satellite.gstime(time);
-          satData.forEach(d => {
-            const eci = satellite.propagate(d.satrec, time);
-            if (eci.position) {
-              const gdPos = satellite.eciToGeodetic(eci.position, gmst);
-              d.lat = satellite.radiansToDegrees(gdPos.latitude);
-                console.log("gdPos.latitude",gdPos.latitude);
-              d.lng = satellite.radiansToDegrees(gdPos.longitude);
-                console.log("gdPos.longitude",gdPos.longitude);
-              d.alt = gdPos.height / EARTH_RADIUS_KM
-                console.log("gdPos.height / EARTH_RADIUS_KM",gdPos.height / EARTH_RADIUS_KM);
-            }
-          });
-  
-          Globe.objectsData(satData);
-        })();
-      });
-  
-      //
-  
-      // Setup renderer
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById('globeViz').appendChild(renderer.domElement);
-  
-      // Setup scene
-      const scene = new THREE.Scene();
-      scene.add(Globe);
-      scene.add(new THREE.AmbientLight(0xbbbbbb));
-      scene.add(new THREE.DirectionalLight(0xffffff, 0.6));
-  
-      // Setup camera
-      const camera = new THREE.PerspectiveCamera();
-      camera.aspect = window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
-      camera.position.z = 400;
-  
-      // Add camera controls
-      const tbControls = new THREE.TrackballControls(camera, renderer.domElement);
-      tbControls.minDistance = 101;
-      tbControls.rotateSpeed = 5;
-      tbControls.zoomSpeed = 0.8;
-  
-      // Kick-off renderer
-      (function animate() { // IIFE
-        // Frame cycle
-        tbControls.update();
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
+  <style>
+    body { margin: 0; }
+
+    #time-log {
+      position: absolute;
+      font-size: 12px;
+      font-family: sans-serif;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgba(200, 200, 200, 0.1);
+      color: lavender;
+      bottom: 10px;
+      right: 10px;
+    }
+    #info {
+      position: absolute;
+      top: 10px;
+      width: 99%;
+      padding: 5px;
+      border-radius: 3px;
+      color: lavender;
+      text-align: center;
+      z-index: 100;
+      display:block;
+    }
+    #info2 {
+      position: absolute;
+      top: 10px;
+      width: 30%;
+      height: 60%;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgb(106, 165, 231);
+      color: rgb(255, 255, 255);
+      text-align: left;
+      z-index: 100;
+      display:block;
+    }
+  </style>
+
+  <script src="//unpkg.com/satellite.js/dist/satellite.min.js"></script>
+
+  <script src="//unpkg.com/three"></script>
+  <script src="//unpkg.com/three-globe"></script>
+<!--  <script src="../../dist/three-globe.js"></script>-->
+</head>
+
+<body>
+  <div id="info2">Description</div>
+  <div id="globeViz"></div>
+  <div id="info">Description</div>
+  <div id="time-log"></div>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three/build/three.module.js" }}</script>
+  <script type="module">
+
+    
+    import { TrackballControls } from '//unpkg.com/three/examples/jsm/controls/TrackballControls.js';
+    // import Stats from 'three/addons/libs/stats.module.js';
+    Object.assign(THREE , { TrackballControls });
+
+    const EARTH_RADIUS_KM = 6371; // km
+    const SAT_SIZE = 80; // km
+    const TIME_STEP = 1 * 100; // per frame
+    // var propogated_data=[];
+    const timeLogger = document.getElementById('time-log');
+
+    const Globe = new ThreeGlobe()
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .objectLat('lat')
+      .objectLng('lng')
+      .objectAltitude('alt');
+
+    const satGeometry = new THREE.OctahedronGeometry(SAT_SIZE * Globe.getGlobeRadius() / EARTH_RADIUS_KM / 2, 0);
+    const satMaterial = new THREE.MeshLambertMaterial({ color: 'palegreen', transparent: true, opacity: 0.7 });
+    Globe.objectThreeObject(() => new THREE.Mesh(satGeometry, satMaterial));
+
+    // data fetch 
+    fetch('./satdata.txt').then(r => r.text()).then(rawData => {
+      const tleData = rawData.replace(/\r/g, '').split(/\n(?=[^12])/).map(tle => tle.split('\n'));
+      const satData = tleData.map(([name, ...tle]) => ({
+        satrec: satellite.twoline2satrec(...tle),
+        name: name.trim().replace(/^0 /, '')
+      }));
+      // console.log('tleData =',tleData);
+      // console.log('satData =',satData);
+
+      // time ticker
+      let time = new Date();
+      (function frameTicker() {
+        requestAnimationFrame(frameTicker);
+
+        time = new Date(+time + TIME_STEP);
+        timeLogger.innerText = time.toString();
+
+        // Update satellite positions
+        const gmst = satellite.gstime(time);
+        satData.forEach(d => {
+          // console.log();
+          const eci = satellite.propagate(d.satrec, time);
+          if (eci.position) {
+            const gdPos = satellite.eciToGeodetic(eci.position, gmst);
+            d.lat = satellite.radiansToDegrees(gdPos.latitude);
+            d.lng = satellite.radiansToDegrees(gdPos.longitude);
+            d.alt = gdPos.height / EARTH_RADIUS_KM
+          }
+        });
+
+        Globe.objectsData(satData);
       })();
-    </script>
-  </body>
+    });
+
+    //
+    
+    // Setup renderer
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('globeViz').appendChild(renderer.domElement);
+
+    // advance
+    const light = new THREE.DirectionalLight(0xffffff, 2)
+    light.position.set(0, 0, 300)
+    light.castShadow = true
+    light.shadow.bias = -0.003
+    light.shadow.mapSize.width = 2048
+    light.shadow.mapSize.height = 2048
+    light.shadow.camera.left = -2
+    light.shadow.camera.right = 2
+    light.shadow.camera.top = -2
+    light.shadow.camera.bottom = 2
+    light.shadow.camera.near = 1
+    light.shadow.camera.far = 5
+    
+
+    const lightPivot = new THREE.Object3D()
+    lightPivot.add(light)
+
+
+    //  mouse movements
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    function onPointerMove( event ) {
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
+    // console.log("moived");
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    } 
+
+
+// =================================code for curved line ====================================
+  //   const curve = new THREE.SplineCurve( [
+  //     // new THREE.Vector2( -50,50 ),
+  //   new THREE.Vector2( -100,100 ),
+
+  //   // new THREE.Vector2( 50,50 ),
+  //   new THREE.Vector2( 100,100 ),
+
+  //   // new THREE.Vector2( 50,-50 ),
+  //   new THREE.Vector2( 100,-100),
+
+  //   // new THREE.Vector2( -50,-50 ),
+  //   new THREE.Vector2( -100,-100),
+
+  //   // new THREE.Vector2( -50,50 ),
+  //   new THREE.Vector2( -100, 100 ),
+  // ] );
+
+  // const points = curve.getPoints( 50 );
+  // const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+  // const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+
+  // // Create the final object to add to the scene
+  // const splineObject = new THREE.Line( geometry, material );
+
+
+    // Setup scene
+    const scene = new THREE.Scene();
+    scene.add(Globe);
+    scene.add(lightPivot)
+    // scene.add(splineObject);
+    scene.add(new THREE.AmbientLight(0xbbbbbb));
+    // scene.add(new THREE.DirectionalLight(0xffffff, 0.6));
+
+    
+
+    // Setup camera
+    const camera = new THREE.PerspectiveCamera();
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    camera.position.z = 400;
+
+    // Add camera controls
+    const tbControls = new THREE.TrackballControls(camera, renderer.domElement);
+    tbControls.minDistance = 101;
+    tbControls.rotateSpeed = 5;
+    tbControls.zoomSpeed = 0.8;
+
+
+    
+    // Kick-off renderer
+    (function animate() { // IIFE
+      // Frame cycle
+      tbControls.update();
+      // lightPivot.rotation.y += 0.01;
+
+      raycaster.setFromCamera( pointer, camera );
+      const intersects = raycaster.intersectObjects( scene.children );
+      for ( let i = 0; i < intersects.length; i ++ ) {
+        // console.log(intersects[ i ].object.parent.uuid);
+        // console.log(intersects[ i ]);
+        // console.log("ok",Globe.getObjectsByProperty('uuid',intersects[ i ].object.parent.uuid));
+        var l = Globe.getObjectsByProperty('uuid',intersects[ i ].object.parent.uuid);
+        // console.log("ok2",l[0].__data);
+        if(l[0] != undefined){
+
+          if(l[0].__data != undefined){
+            document.getElementById('info').innerText=l[0].__data.name;
+            document.getElementById('info2').innerText= JSON.stringify(l[0].__data.satrec).replace(/[,]/gm,'\n');
+            // console.log(l[0].__data);
+          } 
+        }
+      }
+      
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    })();
+    window.addEventListener('pointermove', onPointerMove );
+  </script>
+</body>
