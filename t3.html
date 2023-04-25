@@ -77,7 +77,7 @@
     Globe.objectThreeObject(() => new THREE.Mesh(satGeometry, satMaterial));
 
     // data fetch 
-    fetch('./satdata.txt').then(r => r.text()).then(rawData => {
+    fetch('./space-track-leo.txt').then(r => r.text()).then(rawData => {
       const tleData = rawData.replace(/\r/g, '').split(/\n(?=[^12])/).map(tle => tle.split('\n'));
       const satData = tleData.map(([name, ...tle]) => ({
         satrec: satellite.twoline2satrec(...tle),
